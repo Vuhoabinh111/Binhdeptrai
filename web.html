@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kỷ niệm tình yêu 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font dễ thương -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #ff9acb;
+            --pink-soft: #ffd6ec;
+            --purple: #c084fc;
+            --dark: #12001f;
+            --card-bg: rgba(255, 255, 255, 0.12);
+            --border-soft: rgba(255, 255, 255, 0.35);
+            --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.55);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #fff;
+            background:
+                radial-gradient(circle at top, rgba(255, 255, 255, 0.2), transparent 60%),
+                radial-gradient(circle at bottom, rgba(255, 192, 203, 0.2), transparent 55%),
+                linear-gradient(135deg, #14001f, #3b0764, #f973a5);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .overlay-glow {
+            position: fixed; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255,255,255,0.25), transparent 55%),
+                radial-gradient(circle at 90% 80%, rgba(255,182,193,0.35), transparent 60%);
+            mix-blend-mode: screen; opacity: 0.6; z-index: -1;
+        }
+
+        .container {
+            width: min(1040px, 94vw);
+            margin: 0 auto;
+            padding: 36px 0 48px;
+        }
+
+        /* Floating hearts */
+        .floating-hearts { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+        .floating-hearts span {
+            position: absolute; bottom: -40px; font-size: 18px; color: rgba(255,255,255,0.6);
+            text-shadow: 0 0 12px rgba(255,255,255,0.7); animation: float 14s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+            10% { opacity: 0.9; }
+            100% { transform: translateY(-110vh) translateX(40px) scale(1.4); opacity: 0; }
+        }
+
+        /* Header */
+        header { text-align: center; margin-bottom: 26px; position: relative; z-index: 1; }
+        .love-names {
+            font-family: "Great Vibes", cursive;
+            font-size: clamp(38px, 6vw, 60px);
+            color: #ffe4f1;
+            text-shadow: 0 0 10px rgba(255,255,255,0.7), 0 0 30px rgba(255,138,216,0.9);
+            letter-spacing: 0.08em; margin-bottom: 6px;
+        }
+        .subtitle { font-size: 14px; color: #ffe4f1; opacity: 0.92; }
+        .special-date {
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+            padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.7);
+            background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,192,203,0.18));
+            backdrop-filter: blur(14px); box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+            font-size: 13px; color: #381237;
+        }
+
+        /* Layout - grid */
+        main { position: relative; z-index: 1; }
+        .grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.9fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .card {
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(18px);
+            padding: 20px;
+        }
+
+        .card h2 { font-size: 18px; margin-bottom: 10px; display:flex; align-items:center; gap:8px; }
+        .card p, .card li, .card span { font-size: 13px; }
+
+        /* Story */
+        .story-text { color: #fff5fb; font-size: 14px; line-height: 1.75; }
+        .story-text p + p { margin-top: 10px; }
+        .highlight-quote {
+            margin-top: 12px; padding: 12px; border-radius: 16px;
+            background: rgba(255,255,255,0.14); border: 1px dashed rgba(255,255,255,0.8);
+            font-size: 13px; font-style: italic;
+        }
+
+        /* Photos */
+        .photos-grid {
+            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px;
+        }
+        .photo-card { position: relative; border-radius: 16px; overflow: hidden;
+            background:
+                radial-gradient(circle at 0 0, rgba(255,255,255,0.4), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(255,192,203,0.6), transparent 55%),
+                linear-gradient(145deg, #831843, #4c1d95);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.65);
+            aspect-ratio: 4/3;
+        }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .photo-label { background: rgba(0,0,0,0.55); padding: 4px 8px; border-radius: 999px; font-size:11px; display:inline-flex; align-items:center; gap:6px; color:#fff; }
+
+        /* Timeline */
+        .timeline { margin-top: 8px; list-style:none; border-left:2px solid rgba(255,255,255,0.5); padding-left:14px; }
+        .timeline li { position: relative; margin-bottom: 12px; padding-left:6px; }
+        .timeline li::before {
+            content: ""; position: absolute; left:-15px; top:6px; width:10px; height:10px; border-radius:999px;
+            background: radial-gradient(circle, #f973a5, #fb7185); box-shadow: 0 0 10px rgba(251,113,133,0.9);
+        }
+        .timeline-title { font-weight:600; font-size:13px; margin-bottom:4px; }
+        .timeline-date { font-size:11px; opacity:0.9; color:#ffe3f3; margin-bottom:4px; }
+        .timeline-text { font-size:12px; color:#ffe9f7; }
+
+        /* Right column small cards */
+        .small-cards { display:flex; flex-direction:column; gap:14px; }
+
+        .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+        .tag { padding:6px 10px; border-radius:999px; background-image: linear-gradient(135deg, #ffe4f2, #fed7e2);
+            border:1px solid rgba(255,255,255,0.55); font-size:12px; color:#2f102c;
+        }
+
+        .love-meter { margin-top:8px; font-size:13px; }
+        .meter-bar { margin-top:6px; height:10px; border-radius:999px; background: rgba(255,255,255,0.18); overflow:hidden; }
+        .meter-fill { height:100%; width:100%; background: linear-gradient(90deg, #fb7185, #ec4899, #a855f7); box-shadow: 0 0 16px rgba(251,113,133,0.9); }
+
+        .promise-list { padding-left:16px; margin-top:8px; }
+        .promise-list li { margin-bottom:6px; font-size:13px; color:#fff5fb; }
+
+        /* Footer */
+        footer { margin-top:28px; text-align:center; font-size:12px; color:#ffe4f1; opacity:0.95; }
+        footer span.heart { color:#fecaca; }
+
+        /* Music button (fixed, centered bottom) */
+        .music-toggle {
+            position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 60;
+            display:inline-flex; align-items:center; gap:8px; padding:10px 14px; font-size:13px;
+            font-family: "Poppins", system-ui, sans-serif; border-radius:999px; border:1px solid rgba(255,255,255,.85);
+            background:
+                radial-gradient(circle at 0 0, rgba(255,255,255,.12), transparent 55%),
+                linear-gradient(135deg, #fb7185, #ec4899, #f973a5);
+            color:#fff; box-shadow: 0 6px 18px rgba(0,0,0,.45), 0 0 12px rgba(248,187,208,.6);
+            backdrop-filter: blur(8px); cursor:pointer; width: min(92%, 420px); max-width:420px;
+            transition: transform .15s ease, box-shadow .15s ease, filter .15s ease, opacity .15s ease;
+        }
+        .music-toggle:hover { transform: translateX(-50%) translateY(-3px) scale(1.02); }
+        .music-icon { font-size:16px; display:inline-block; line-height:1; }
+        .music-label { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:70%; display:inline-block; vertical-align:middle; }
+
+        .music-toggle.playing { filter: saturate(1.15); animation: pulse-glow 1.4s infinite; }
+        @keyframes pulse-glow {
+            0%,100% { box-shadow: 0 0 12px rgba(248,187,208,.8), 0 12px 32px rgba(0,0,0,.5); }
+            50% { box-shadow: 0 0 22px rgba(248,187,208,1), 0 16px 40px rgba(0,0,0,.7); }
+        }
+
+        #bg-music { display:none; }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .grid { grid-template-columns: 1fr; gap: 18px; }
+            header { text-align: left; padding: 0 6vw; }
+            .container { padding-top: 24px; }
+        }
+
+        @media (max-width: 560px) {
+            .photos-grid { grid-template-columns: 1fr; }
+            .card { padding: 14px; }
+            .music-toggle { width: calc(100% - 36px); left: 50%; transform: translateX(-50%); bottom: 14px; }
+            .music-label { max-width: 60%; }
+            .love-names { font-size: clamp(28px, 8vw, 46px); }
+        }
+
+        @media (max-width: 360px) {
+            .music-label { display: none; }
+            .music-toggle { padding: 10px; width: 56px; border-radius: 999px; }
+            .music-icon { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-glow"></div>
+
+    <!-- Trái tim bay -->
+    <div class="floating-hearts" aria-hidden="true">
+        <span style="left: 5%; animation-duration: 13s; animation-delay: 0s;">❤</span>
+        <span style="left: 18%; animation-duration: 16s; animation-delay: 2s;">❤</span>
+        <span style="left: 32%; animation-duration: 15s; animation-delay: 4s;">❤</span>
+        <span style="left: 48%; animation-duration: 18s; animation-delay: 1s;">❤</span>
+        <span style="left: 63%; animation-duration: 14s; animation-delay: 3s;">❤</span>
+        <span style="left: 76%; animation-duration: 17s; animation-delay: 5s;">❤</span>
+        <span style="left: 88%; animation-duration: 19s; animation-delay: 2s;">❤</span>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="love-names">
+                <span>Vũ Hòa Bình</span> &amp; <span>Nguyễn Thị Minh Ánh</span>
+            </div>
+            <p class="subtitle">Lời xin lỗi nhỏ bé của người gấc iu em 💫</p>
+            <div class="special-date" role="note">
+                <span class="icon">📅</span> Kể từ ngày: <strong>23/4/2024</strong>
+            </div>
+        </header>
+
+        <main>
+            <div class="grid">
+                <section class="card">
+                    <h2><span class="icon">💕</span> Anh chỉ rất yêu bé mà thôi</h2>
+                    <div class="story-text">
+                        <p>Thực sự là thời gian này anh hơi bận rộn, không có nhiều thời gian dành cho em như trước. Anh cũng thấy được sự dễ nóng giận của bản thân, nhưng anh luôn mong em hiểu rằng, những điều đó chỉ vì anh thực sự muốn tốt cho bé mà thôi.</p>
+                        <p>Bé à, anh chỉ nói những lời tệ bạc ấy khi anh nghe em nói rằng em không quan tâm đến sức khỏe của bản thân, "Sống được bao lâu thì sống", anh không hiểu em nghĩ gì mà em dám nói vậy luôn, anh chỉ muốn em biết rằng anh rất quan tâm đến em, anh không muốn em làm tổn thương bản thân mình như vậy.</p>
+                        <p>Cái này anh ngồi nghịch linh tinh thôi ạ, nhưng anh yêu bé, nên anh lúc nào cũng nghĩ tới em mà, anh làm vậy để thể hiện tình yêu này đó, em đúng là một cô vợ khờ, siu siu khờ, hè hè lần này hem được đọc chữ viết tay của ck nhưng mợ được đọc code của ck nhe hihi.</p>
+
+                        <div class="highlight-quote">“Trên đời này, điều lãng mạn nhất không phải là hoa hồng hay quà tặng, mà là mỗi sáng thức dậy vẫn thấy mình còn có nhau.”</div>
+                    </div>
+
+                    <h2 style="margin-top: 18px;"><span class="icon">📷</span> Những khoảnh khắc lung linh</h2>
+                    <div class="photos-grid" aria-hidden="false">
+                        <div class="photo-card"><img src="z7202567677685_cee4d69efa23afbc5a8347b9e870aab2.jpg" alt="Lần hẹn hò đầu tiên"></div>
+                        <div class="photo-card"><img src="z7202606033979_d3dbb3d2fa493955ceca6b818d23128b.jpg" alt="Khoảnh khắc 2"></div>
+                        <div class="photo-card"><img src="z7202609380658_dffc52419d93947e6edb920c39f105fb.jpg" alt="Khoảnh khắc 3"></div>
+                        <div class="photo-card"><img src="z7202609824061_0acda299f47c1d79f79114ce3ea1faca.jpg" alt="Khoảnh khắc 4"></div>
+                    </div>
+                </section>
+
+                <section class="small-cards">
+                    <div class="card">
+                        <h2><span class="icon">⏳</span> Dòng thời gian nhỏ</h2>
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-title">Lần đầu gặp nhau</div>
+                                <div class="timeline-date">[23 / 3 / 2023]</div>
+                                <div class="timeline-text">Một ngày thi bình thường không ai nghĩ sẽ thay đổi cả cuộc đời.</div>
+                            </li>
+                            <li>
+                                <div class="timeline-title">Tin nhắn đầu tiên</div>
+                                <div class="timeline-date">[3 / 12 / 2023]</div>
+                                <div class="timeline-text">Chồng giỏi hem húi.</div>
+                            </li>
+                            <li>
+                                <div class="timeline-title">Chính thức bên nhau</div>
+                                <div class="timeline-date">[23 / 4 / 2024]</div>
+                                <div class="timeline-text">Thật ra iu lâu ròi nhưng hem thèm tỏ tình hihi.</div>
+                            </li>
+                            <li>
+                                <div class="timeline-title">Một cột mốc đặc biệt</div>
+                                <div class="timeline-date">[Ngày nào / Cũng / Đặc biệt]</div>
+                                <div class="timeline-text">Tình yêu của tụi mình đã là một điều đặc biệt mỗi ngày rồi.</div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h2><span class="icon">💘</span> Chỉ số yêu thương</h2>
+                        <div class="love-meter">
+                            Mức độ “nghiện” nhau:
+                            <div class="meter-bar"><div class="meter-fill" aria-hidden="true"></div></div>
+                            <div style="font-size:11px; opacity:0.95; margin-top:6px;">100% và vẫn đang tăng mỗi ngày ✨</div>
+                        </div>
+                        <div class="tags">
+                            <div class="tag">Nắm tay thiệt chặt 🤝</div>
+                            <div class="tag">Hay giận xíu nhưng thương nhiều hơn 😚</div>
+                            <div class="tag">Ủng hộ nhau hết mình 💪</div>
+                            <div class="tag">Đi đâu cũng nhớ tới người kia 🌙</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2><span class="icon">🤍</span> Những lời hứa nhỏ</h2>
+                        <ul class="promise-list">
+                            <li>Luôn cố gắng lắng nghe nhau, kể cả những chuyện nhỏ xíu.</li>
+                            <li>Khi buồn sẽ nói, không im lặng một mình.</li>
+                            <li>Cùng nhau đi qua những mùa thi, mùa stress và cả mùa vui.</li>
+                            <li>Bé cưới anh</li>
+                            <li>Anh cưới bé</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            Trang nhỏ này được làm riêng để dành cho chúng ta <span class="heart">♥</span>
+            Nếu một ngày nào đó em/anh quên, hãy mở lại để nhớ mình đã từng thương nhau như thế nào.
+        </footer>
+    </div>
+
+    <!-- Nhạc nền (ẩn) -->
+    <audio id="bg-music" src="ChoEmAnToan-HIEUTHUHAI-11966375_1.mp3" preload="auto" loop></audio>
+
+    <!-- Nút bật/tắt nhạc (fixed) -->
+    <button class="music-toggle" id="music-btn" type="button" aria-pressed="false">
+        <span class="music-icon">🎶</span>
+        <span class="music-label">Nhấn vô đây trước nè bé húi</span>
+    </button>
+
+    <script>
+        const audio = document.getElementById('bg-music');
+        const btn   = document.getElementById('music-btn');
+
+        function setBtnState(isPlaying) {
+            if (!btn) return;
+            if (isPlaying) {
+                btn.classList.add('playing');
+                btn.setAttribute('aria-pressed', 'true');
+                btn.innerHTML = '<span class="music-icon">💖</span><span class="music-label">Oki nha húi</span>';
+            } else {
+                btn.classList.remove('playing');
+                btn.setAttribute('aria-pressed', 'false');
+                btn.innerHTML = '<span class="music-icon">🎶</span><span class="music-label">Nhấn vô đây trước nha húi iu</span>';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            if (!audio || !btn) return;
+            audio.play().then(() => setBtnState(true)).catch(() => setBtnState(false));
+        });
+
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (!audio) return;
+                if (audio.paused) { audio.play(); setBtnState(true); }
+                else { audio.pause(); setBtnState(false); }
+            });
+        }
+    </script>
+</body>
+</html>
