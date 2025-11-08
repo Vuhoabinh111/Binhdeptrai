@@ -222,6 +222,12 @@
             <div class="special-date" role="note">
                 <span class="icon">📅</span> Kể từ ngày: <strong>23/4/2024</strong>
             </div>
+            <!-- Đổi YYYY-MM-DD thành ngày bắt đầu yêu của hai bạn -->
+            <p class="love-chip">
+                Đã bên nhau
+                <strong><span id="love-days" data-start="2024-04-23"></span></strong> ngày 💗
+            </p>
+
         </header>
 
         <main>
@@ -251,7 +257,7 @@
                         <ul class="timeline">
                             <li>
                                 <div class="timeline-title">Lần đầu gặp nhau</div>
-                                <div class="timeline-date">[23 / 3 / 2023]</div>
+                                <div class="timeline-date">[23 / 4 / 2023]</div>
                                 <div class="timeline-text">Một ngày thi bình thường không ai nghĩ sẽ thay đổi cả cuộc đời.</div>
                             </li>
                             <li>
@@ -316,7 +322,7 @@
         <span class="music-label">Nhấn vô đây trước nè bé húi</span>
     </button>
 
-    <script>
+    <!-- <script>
         const audio = document.getElementById('bg-music');
         const btn   = document.getElementById('music-btn');
 
@@ -345,6 +351,7 @@
                 else { audio.pause(); setBtnState(false); }
             });
         }
-    </script>
+    </script> -->
+    <script src="app.js" defer></script>
 </body>
 </html>
